@@ -1,0 +1,442 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <title>
+   Visa History
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      body {
+        height: -webkit-fill-available;
+      }
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      max-width: 425px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      height: 100vh;
+      height: -webkit-fill-available;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #history-page {
+      transform: translateX(0);
+      z-index: 10;
+      opacity: 1;
+    }
+
+    .slide-left {
+      animation: slideLeft 0.5s forwards;
+    }
+
+    .slide-right {
+      animation: slideRight 0.5s forwards;
+    }
+
+    .slide-in-right {
+      animation: slideInRight 0.5s forwards;
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.5s forwards;
+    }
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .activity-item {
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .activity-item-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .scale-in {
+      animation: scaleIn 0.3s forwards;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Improved styles */
+    .card-shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .profile-img-container {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      overflow: hidden;
+      background-color: #f3f4f6;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .visa-card {
+      min-width: 280px;
+      height: 160px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #3B82F6 0%, #22D3EE 100%);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
+  </style>
+ </head>
+ <body class="bg-white text-black">
+  <div class="page bg-white" id="history-page">
+   <div class="max-w-md mx-auto rounded-3xl overflow-hidden">
+    <div class="relative px-5 pt-14 pb-10" style="background: linear-gradient(90deg, #3B82F6 0%, #22D3EE 100%)">
+     <div class="flex items-center justify-between text-white">
+      <button aria-label="Back" class="text-white text-2xl -ml-1" id="back-to-dashboard">
+       <i class="fas fa-arrow-left">
+       </i>
+      </button>
+      <h1 class="font-semibold text-lg leading-6">
+       Account Finance
+      </h1>
+      <button aria-label="Help" class="text-white text-xl opacity-90 hover:opacity-100">
+       <i class="fas fa-question-circle">
+       </i>
+      </button>
+     </div>
+     <h2 class="mt-6 text-white font-extrabold text-3xl leading-[1.1]">
+      Rp. 25.550.000,-
+     </h2>
+     <p class="text-white text-base mt-1 font-normal">
+      12 June 2022
+     </p>
+    </div>
+    <div class="px-5 pt-6 pb-8 bg-white">
+     <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-gray-700 text-lg">
+       Statistics
+      </h3>
+      <button class="text-gray-500 text-sm font-normal hover:underline" type="button">
+       See All
+      </button>
+     </div>
+     <div class="relative w-full h-48 scale-in">
+      <svg aria-hidden="true" class="w-full h-full" fill="none" viewbox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+       <defs>
+        <lineargradient gradientunits="userSpaceOnUse" id="gradient-fill" x1="0" x2="0" y1="0" y2="1">
+         <stop stop-color="#3B82F6" stop-opacity="0.15">
+         </stop>
+         <stop offset="1" stop-color="#3B82F6" stop-opacity="0">
+         </stop>
+        </lineargradient>
+       </defs>
+       <path d="M20 120 C60 40 120 40 160 100 C200 160 260 80 300 140" fill="url(#gradient-fill)" stroke="#3B82F6" stroke-width="3">
+       </path>
+       <circle class="pulse" cx="160" cy="100" fill="white" r="6" stroke="#3B82F6" stroke-width="3">
+       </circle>
+       <line stroke="#9CA3AF" stroke-dasharray="4 4" x1="160" x2="160" y1="100" y2="140">
+       </line>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.5" x="20" y="155">
+        Jan
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.5" x="70" y="155">
+        Feb
+       </text>
+       <text fill="#3B82F6" font-family="Inter, sans-serif" font-size="12" font-weight="600" x="155" y="155">
+        Mar
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.5" x="210" y="155">
+        Apr
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.5" x="280" y="155">
+        May
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.3" x="0" y="20">
+        5M
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.3" x="0" y="50">
+        4M
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.3" x="0" y="80">
+        3M
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.3" x="0" y="110">
+        2M
+       </text>
+       <text fill="#9CA3AF" font-family="Inter, sans-serif" font-size="12" opacity="0.3" x="0" y="140">
+        1M
+       </text>
+      </svg>
+     </div>
+     <div class="mb-4">
+      <div aria-controls="category-list" aria-expanded="true" class="flex justify-between items-center cursor-pointer select-none" id="category-toggle" role="button" tabindex="0">
+       <h3 class="font-semibold text-gray-700 text-lg">
+        History
+       </h3>
+       <button aria-label="Toggle category list" class="text-gray-500 text-sm font-normal flex items-center space-x-1 focus:outline-none" type="button">
+        <span id="category-toggle-text">
+         Category
+        </span>
+        <i class="fas fa-chevron-down text-xs transition-transform duration-300" id="category-toggle-icon">
+        </i>
+       </button>
+      </div>
+      <div aria-labelledby="category-toggle" class="space-y-4 mt-3" id="category-list" role="region">
+       <div class="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm activity-item" role="listitem">
+        <div class="flex items-center space-x-4">
+         <div aria-hidden="true" class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-200">
+          <i class="fas fa-chart-line text-blue-600 text-lg">
+          </i>
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900 text-base leading-5">
+           Deposit
+          </p>
+          <p class="text-blue-600 text-sm leading-5 mt-0.5">
+           Rp15.510.000,-
+          </p>
+          <div class="flex items-center space-x-1 mt-1 text-gray-500 text-sm">
+           <i class="fas fa-map-marker-alt text-base">
+           </i>
+           <span>
+            Bank Mandiri ATM
+           </span>
+          </div>
+         </div>
+        </div>
+        <div class="text-right text-gray-500 text-xs leading-4">
+         <p>
+          11 March 2022
+         </p>
+         <p class="mt-2">
+          11.21 AM
+         </p>
+        </div>
+       </div>
+       <div class="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm activity-item" role="listitem">
+        <div class="flex items-center space-x-4">
+         <div aria-hidden="true" class="flex items-center justify-center w-12 h-12 rounded-full bg-red-200">
+          <i class="fas fa-chart-line fa-flip-horizontal text-red-600 text-lg">
+          </i>
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900 text-base leading-5">
+           Withdraw
+          </p>
+          <p class="text-red-600 text-sm leading-5 mt-0.5">
+           Rp15.510.000,-
+          </p>
+          <div class="flex items-center space-x-1 mt-1 text-gray-500 text-sm">
+           <i class="fas fa-map-marker-alt text-base">
+           </i>
+           <span>
+            Bank Mandiri ATM
+           </span>
+          </div>
+         </div>
+        </div>
+        <div class="text-right text-gray-500 text-xs leading-4">
+         <p>
+          11 March 2022
+         </p>
+         <p class="mt-2">
+          11.22 AM
+         </p>
+        </div>
+       </div>
+       <div class="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm activity-item" role="listitem">
+        <div class="flex items-center space-x-4">
+         <div aria-hidden="true" class="flex items-center justify-center w-12 h-12 rounded-full bg-red-200">
+          <i class="fas fa-chart-line fa-flip-horizontal text-red-600 text-lg">
+          </i>
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900 text-base leading-5">
+           Withdraw
+          </p>
+          <p class="text-red-600 text-sm leading-5 mt-0.5">
+           Rp15.510.000,-
+          </p>
+          <div class="flex items-center space-x-1 mt-1 text-gray-500 text-sm">
+           <i class="fas fa-map-marker-alt text-base">
+           </i>
+           <span>
+            Bank Mandiri ATM
+           </span>
+          </div>
+         </div>
+        </div>
+        <div class="text-right text-gray-500 text-xs leading-4">
+         <p>
+          11 March 2022
+         </p>
+         <p class="mt-2">
+          11.22 AM
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <nav class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 flex justify-around items-center py-3">
+    <button class="flex flex-col items-center text-gray-400" onclick="window.location.href='dashboard.html'">
+     <i class="fas fa-home text-2xl">
+     </i>
+    </button>
+    <button class="flex flex-col items-center text-blue-600">
+     <i class="fas fa-history text-2xl">
+     </i>
+     <div class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1">
+     </div>
+    </button>
+    <button class="flex flex-col items-center text-gray-400">
+     <i class="fas fa-comment-alt text-2xl">
+     </i>
+    </button>
+    <button class="flex flex-col items-center text-gray-400">
+     <i class="fas fa-user text-2xl">
+     </i>
+    </button>
+   </nav>
+  </div>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.activity-item');
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('activity-item-visible');
+        }, 200 + index * 150);
+      });
+
+      const backToDashboard = document.getElementById('back-to-dashboard');
+      backToDashboard.addEventListener('click', function() {
+        window.location.href = 'dashboard.html';
+      });
+
+      // Toggle category list
+      const categoryToggle = document.getElementById('category-toggle');
+      const categoryList = document.getElementById('category-list');
+      const categoryToggleIcon = document.getElementById('category-toggle-icon');
+      const categoryToggleText = document.getElementById('category-toggle-text');
+
+      categoryToggle.addEventListener('click', () => {
+        const isExpanded = categoryToggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          categoryList.style.display = 'none';
+          categoryToggle.setAttribute('aria-expanded', 'false');
+          categoryToggleIcon.style.transform = 'rotate(-90deg)';
+          categoryToggleText.textContent = 'Category (Closed)';
+        } else {
+          categoryList.style.display = 'block';
+          categoryToggle.setAttribute('aria-expanded', 'true');
+          categoryToggleIcon.style.transform = 'rotate(0deg)';
+          categoryToggleText.textContent = 'Category';
+        }
+      });
+
+      // Initialize icon rotation
+      categoryToggleIcon.style.transition = 'transform 0.3s ease';
+    });
+  </script>
+ </body>
+</html>
